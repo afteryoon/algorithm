@@ -11,8 +11,8 @@ public class Main {
 	}
 	public void s2480()throws IOException{
 		
-		Scanner sc= new Scanner(System.in);
-		String [] nums=sc.nextLine().split(" ");
+		BufferedReader br= new BufferedReader(new InputStreamReader(System.in));
+		String [] nums=br.readLine().split(" ");
 		Map<String,Integer> map = new HashMap<>();
 		int answer=0;
 		
