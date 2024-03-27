@@ -1,19 +1,28 @@
-
+import java.io.*;
+import java.math.BigInteger;
 import java.util.*;
-
 public class Main {
-	public static void main(String[] args) {
-		Scanner sc = new Scanner(System.in);
-		int n= sc.nextInt();
-		sc.nextLine();
+	public static void main(String[] args) throws IOException{
 		
-		for (int i = 0; i < n; i++) {
+		Main main = new Main();
+		
+		main.s2675();
+	
+	}
+	public void s2675() throws IOException{
+		BufferedReader br= new BufferedReader(new InputStreamReader(System.in));
+		int n= Integer.valueOf(br.readLine());
+		
+		for(int i=0; i<n; i++) {
 			String p="";
-			String[] s=sc.nextLine().split(" ");
-			int r=Integer.valueOf(s[0]);
-			for (int j = 0; j < s[1].length(); j++) {
-				for (int j2 = 0; j2 < r; j2++) 
-						p+=s[1].charAt(j);
+			StringTokenizer st=new StringTokenizer(br.readLine()," ");
+			int r= Integer.valueOf(st.nextToken());
+			String str=st.nextToken();
+			
+			for(int j=0; j<str.length(); j++) {
+				for(int j2=0; j2<r; j2++) {
+					p+=str.charAt(j);
+				}
 			}
 			
 			System.out.println(p);
