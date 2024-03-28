@@ -1,31 +1,34 @@
-
+import java.io.*;
+import java.math.BigInteger;
 import java.util.*;
-
 public class Main {
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException{
 		
-	Scanner sc = new Scanner(System.in);
+		Main main = new Main();
 		
-		double a= sc.nextDouble();
-		sc.nextLine();
-		String[] n= sc.nextLine().split(" ");
-		double[] arr= new double[n.length];
+		main.s1546();
 		
-		double max=arr[0];
-		double result=0;
+	}
+	public void s1546() throws IOException{
+		BufferedReader br= new BufferedReader(new InputStreamReader(System.in));
+		int n= Integer.parseInt(br.readLine());
+		double [] arr=new double[n];
+		StringTokenizer st= new StringTokenizer(br.readLine()," ");
+		double sum=0;
 		
+		for (int i = 0; i < n; i++) 
+			arr[i]=Double.parseDouble(st.nextToken());
+		
+		double max=Arrays.stream(arr).max().getAsDouble();
 		for (int i = 0; i < arr.length; i++) {
-			arr[i]= Integer.valueOf(n[i]);
-			if(max<arr[i])
-				max=arr[i];
+			arr[i]=setScore(arr[i],max);
+			sum+=arr[i];
 		}
-		for (int i = 0; i < arr.length; i++) {
-			result+= arr[i]/max;
-		}
-		
-		System.out.printf("%.2f",((result)/a)*100);
-		
-	
-			
+		sum/=n;
+		System.out.println(sum);
+	}
+	public double setScore(double num, double max) {
+		double avg = ((double)Math.round((num / max) * 10000) ) / 100;
+		return avg;
 	}
 }
