@@ -1,15 +1,17 @@
+import java.io.*;
+import java.math.BigInteger;
 import java.util.*;
-
 public class Main {
-
-	public static void main(String[] args) {
-		Scanner sc= new Scanner(System.in);
+	public static void main(String[] args) throws IOException{
 		
-		String str=sc.nextLine().trim();
-		StringTokenizer st = new StringTokenizer(str," ");
+		Main main = new Main();
 		
-		System.out.println(st.countTokens());
-		
+		main.s1152();
+	
 	}
-
+	public void s1152() throws IOException{
+		BufferedReader br= new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st= new StringTokenizer(br.readLine().trim()," ");
+		System.out.println(st.countTokens());
+	}
 }
