@@ -1,56 +1,53 @@
 
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Stack;
 import java.util.StringTokenizer;
 
-/*
- *  수신한 탑의 번호를 출력
- *  타워의 개수 n
- *  타워들의 높이
- *  
- *  첫번째 타워는 0 고정
- *  타워보다 높은 타워가 없으면 0
- *  높이를 
- *  
- */
 public class Main {
-	public static void main(String[] args) throws  IOException {
+/*
+ * 백준 2493 탑 stack
+ * 메모리
+ * 시간
+ * 시간 복잡도
+ * 
+ * 문제
+ * 일직선 위에 N개의 높이가 서로 다른 탑
+ * 송신 받은  탑의 index+1 출력
+ */
+	public static void main(String[] args) throws NumberFormatException, IOException {
 		BufferedReader br= new BufferedReader(new InputStreamReader(System.in));
+		int n= Integer.parseInt(br.readLine());
+		StringTokenizer st= new StringTokenizer(br.readLine());
 		
-		int n=Integer.parseInt(br.readLine());
-		Stack<int[]> stack= new Stack<>();
+		int[] arr= new int[n];
+		Stack<Integer> stack = new Stack<>();
+		
+		for (int i = 0; i <n; i++) {
+			arr[i]=Integer.parseInt(st.nextToken());
+		}
+		
+		for (int i = n-1; i >= 0; i--) {
+
+			while(!stack.isEmpty() && arr[stack.peek()]<arr[i]) {
+				arr[stack.pop()]=i+1;
+			}
+			
+			stack.push(i);
+		}
+		
+		while(!stack.isEmpty()){
+			arr[stack.pop()]=0;
+		}
 		
 		StringBuilder sb= new StringBuilder();
-		StringTokenizer st = new StringTokenizer(br.readLine());
-		for (int i = 1; i <=n; i++) {
-			int height=Integer.parseInt(st.nextToken());
-			
-			if(stack.isEmpty()) {
-				sb.append("0 ");
-				 stack.add(new int[] {i, height});
-			}else {
-				stack.add(new int[] {i, height});
-				while(true) {
-					
-					if(stack.isEmpty()) {
-						sb.append("0 ");
-						 stack.push(new int[] {i, height});
-						 break;
-					}
-					int tower[]=stack.peek();
-					if(tower[1]>height) {
-						sb.append(tower[0]+" ");
-						stack.add(new int[] {i,height});
-						break;
-					}else {
-						stack.pop();
-					}
-				}
-			}
+		for (int i = 0; i < arr.length; i++) {
+			sb.append(arr[i]+" ");
 		}
+		
 		System.out.println(sb);
+		
 	}
+
 }
