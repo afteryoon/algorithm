@@ -1,17 +1,12 @@
-import java.util.*;
+import java.util.stream.*;
 class Solution {
     public int[] solution(int n) {
-        List<Integer> list = new ArrayList<>();
-        list.add(n);
-        while(n != 1){
-            if(n%2 ==0){
-                n/=2;
-                list.add(n);
-                continue;
-            }
-            n= n*3+1;
-            list.add(n);
-        }
-        return list.stream().mapToInt(i -> i).toArray();
+          return IntStream.concat(
+                        IntStream.iterate(n, i -> i > 1,
+                                          i -> i % 2 == 0 ?
+                                          i / 2 : 
+                                          i * 3 + 1),
+                        IntStream.of(1))
+                .toArray();
     }
 }
