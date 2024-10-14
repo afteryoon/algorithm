@@ -6,7 +6,7 @@ class Solution {
         if(!fa && !fb)
             answer=a*a+b*b;
         else if(fa && fb)
-            answer = a-b <0 ? (a-b)*-1 : a-b ;
+            answer = a-b <0 ? Math.abs(a-b) : a-b ;
         else
             answer = 2*(a+b);
         return answer;
