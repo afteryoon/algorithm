@@ -1,50 +1,42 @@
 
 import java.io.*;
 import java.util.*;
-public class Main {
 
-	public static int N;	// 정적변수로 변경
-	public static int M;	// 정적변수로 변경
-	public static int[] arr;
-	public static boolean[] visit;
-	public static StringBuilder sb = new StringBuilder();
- 
-	public static void main(String[] args) throws IOException {
- 
+public class Main {
+	static int n,m;
+	static int[] result;
+	static boolean[] isUse;
+	static StringBuilder sb = new StringBuilder();
+	public static void main(String[] args ) throws Exception {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
- 
 		StringTokenizer st = new StringTokenizer(br.readLine());
- 
-		// 정적변수 N과 M을 초기화해준다.
-		N = Integer.parseInt(st.nextToken()); 
-		M = Integer.parseInt(st.nextToken());
- 
-		arr = new int[M];
-		visit = new boolean[N];
-        
-		// 정적변수를 쓰면 되기 때문에 굳이 N과 M을 넘겨줄 필요 없다.
-		dfs(0);
-		System.out.println(sb);
- 
+		n = Integer.parseInt(st.nextToken());
+		m = Integer.parseInt(st.nextToken());
+
+		result = new int[n+1];
+		isUse = new boolean[n+1];
+
+		backtrack(0);
+
+		System.out.print(sb);
 	}
- 
-	public static void dfs(int depth) {
-		if (depth == M) {
-			for (int val : arr) {
-				sb.append(val).append(' ');
+
+	public static void backtrack(int depth) {
+		if(depth == m) {
+			for(int i = 0; i<m; i++) {
+				sb.append(result[i]).append(" ");
 			}
-			sb.append('\n');
+			sb.append("\n");
 			return;
 		}
- 
-		for (int i = 0; i < N; i++) {
-			if (!visit[i]) {
-				visit[i] = true;
-				arr[depth] = i + 1;
-				dfs(depth + 1);
-				visit[i] = false;
+		for(int i = 1; i<=n; i++) {
+			if(!isUse[i]) {
+				isUse[i] = true;
+				result[depth] = i;
+				backtrack(depth+1);
+				isUse[i] = false;
 			}
 		}
+
 	}
- 
 }
