@@ -1,5 +1,5 @@
 -- 코드를 입력하세요
-SELECT
+select
     count(*) count
 from
-    ANIMAL_INS
+    ANIMAL_INS;
