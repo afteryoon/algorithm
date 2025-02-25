@@ -1,26 +1,19 @@
-import java.util.*;
 class Solution {
-    int[] arr;
-    int answer=0;
-    int check;
-    
     public int solution(int[] numbers, int target) {
-        arr = numbers;
-        check = target;
-        
-        dfs(0,0);
-        return answer;
+    
+        return dfs(numbers,0,0,target);
     }
     
-    public void dfs(int index, int sum){
-        if(index == arr.length){
-            if(sum == check)
-                answer++;
-            return;
+    public static int dfs(int[] nums,int i,int sum, int target) {
+        int count = 0;
+        if(i == nums.length) {
+            if(target == sum) count++;
+            return count;
         }
+        int n = nums[i];
+        count+= dfs(nums,i+1,sum+n,target);
+        count+= dfs(nums,i+1,sum-n,target);
         
-        dfs(index+1, sum+arr[index]);
-        dfs(index+1, sum-arr[index]);
-        
+        return count;
     }
 }
