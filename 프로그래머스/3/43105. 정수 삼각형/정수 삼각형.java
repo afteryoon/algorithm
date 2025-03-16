@@ -17,10 +17,6 @@ class Solution {
             }
         }
         
-        for(int i=0; i<triangle[triangle.length-1].length; i++) {
-            answer = dp[triangle.length-1][i] > answer ? dp[triangle.length-1][i] :answer;
-        }
-        
-        return answer;
+        return Arrays.stream(dp[triangle.length-1]).max().orElse(0);
     }
 }
