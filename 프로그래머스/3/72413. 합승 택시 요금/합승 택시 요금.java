@@ -14,9 +14,9 @@ class Solution {
             return this.cost - other.cost;
         }
     }
-    
+    static List<List<Move>> graph = new ArrayList<>();
     public int solution(int n, int s, int a, int b, int[][] fares) {
-        List<List<Move>> graph = new ArrayList<>();
+        
         for(int i = 0; i <= n; i++) {
             graph.add(new ArrayList<>());
         }
@@ -30,9 +30,9 @@ class Solution {
             graph.get(to).add(new Move(from, cost));
         }
         
-        int[] fromStart = dijkstra(n, s, graph);
-        int[] fromA = dijkstra(n, a, graph);
-        int[] fromB = dijkstra(n, b, graph);
+        int[] fromStart = dijkstra(n, s);
+        int[] fromA = dijkstra(n, a);
+        int[] fromB = dijkstra(n, b);
         
         int minCost = Integer.MAX_VALUE;
         for(int k = 1; k <= n; k++) {
@@ -44,31 +44,31 @@ class Solution {
         return minCost;
     }
     
-    private int[] dijkstra(int n, int start, List<List<Move>> graph) {
-        int[] distances = new int[n+1];
-        Arrays.fill(distances, Integer.MAX_VALUE);
-        distances[start] = 0;
-        
+    private int[] dijkstra(int n, int start) {
+        int[] dist = new int[n+1];
+        Arrays.fill(dist,Integer.MAX_VALUE);
+        dist[start] = 0;
         PriorityQueue<Move> pq = new PriorityQueue<>();
-        pq.offer(new Move(start, 0));
+        pq.add(new Move(start,0));
         
-        while(!pq.isEmpty()) {
-            Move current = pq.poll();
-            int currentNode = current.to;
-            int currentCost = current.cost;
+        while(!pq.isEmpty()){
+            Move cur = pq.poll();
+            int curNode = cur.to;
+            int curCost = cur.cost;
             
-            if(currentCost > distances[currentNode]) continue;
+            if(curCost > dist[curNode] ) continue;
             
-            for(Move next : graph.get(currentNode)) {
-                int nextCost = currentCost + next.cost;
+            for(Move next : graph.get(curNode)) {
+                int nextCost = curCost+next.cost;
                 
-                if(nextCost < distances[next.to]) {
-                    distances[next.to] = nextCost;
-                    pq.offer(new Move(next.to, nextCost));
+                if(nextCost < dist[next.to]) {
+                    dist[next.to] = nextCost;
+                    pq.add(new Move(next.to,nextCost));
                 }
             }
+            
         }
         
-        return distances;
+        return dist;
     }
 }
