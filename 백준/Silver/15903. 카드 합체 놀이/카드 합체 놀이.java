@@ -1,49 +1,29 @@
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.PriorityQueue;
-import java.util.StringTokenizer;
-
-/*
- *시간
- *메모리
- *
- *-시간복잡도
- *
- *문제 추론
- *
- *
- */
+import java.util.*;
+import java.io.*;
 
 public class Main {
-	public static void main(String[] args) throws IOException {
-		BufferedReader br= new BufferedReader(new InputStreamReader(System.in));
-		StringTokenizer st;
-		
-		st= new StringTokenizer(br.readLine()," ");
-		int size=Integer.parseInt(st.nextToken());
-		int n=Integer.parseInt(st.nextToken());
-		
-		PriorityQueue<Long> pq= new PriorityQueue<>();
-		st= new StringTokenizer(br.readLine()," ");
-		
-		for (int i = 0; i <size; i++) {
-			pq.add(Long.parseLong(st.nextToken()));
+	public static void main(String[] args) throws Exception {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st = new StringTokenizer(br.readLine());
+		PriorityQueue<Long> pq = new PriorityQueue<>();
+		int n = Integer.parseInt(st.nextToken());
+		int m = Integer.parseInt(st.nextToken());
+		long sum = 0;
+
+		st = new StringTokenizer(br.readLine());
+		for(int i=0; i<n; i++) {
+			long card = Long.parseLong(st.nextToken());
+			pq.add(card);
+			sum+=card;
 		}
-		
-		
-		for (int i = 0; i < n; i++) {
-			long min= pq.poll() + pq.poll();
-			
-			pq.add(min);
-			pq.add(min);
+
+		for(int i=0; i<m; i++) {
+			long mix = pq.poll() +pq.poll();
+			sum+= mix;
+			pq.add(mix);
+			pq.add(mix);
 		}
-		
-		Long sum=0L;
-		
-		while(!pq.isEmpty()) 
-			sum+=pq.poll();
-		
-		System.out.println(sum);
+
+		System.out.print(sum);
 	}
 }
